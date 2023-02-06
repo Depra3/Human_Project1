@@ -1,0 +1,5 @@
+- Heroku.com 회원가입
+  --> sqlite3 DB 활용
+  --> 배포가 됨
+- Streamlit Sign Up 회원가입
+

@@ -1,0 +1,28 @@
+## 프로젝트 전체 개요
+
+### Project 1 내방어디
+ - 프로젝트 상세 1 []()
+ - 유튜브 시연 영상 : 유튜브 이름
+ - 폴더명 : 내방 어디
+ - 링크 : 내방 어디
+기간 : 23~~ `~~ 23
+
+팀명 : 
+사용언어 : python
+사용툴 : vs code
+라이브러리 버젼 : pandas(1.5.0 v) /
+
+내용 : 서울시 전/월세 실거래 데이터를 기반한 검색, 머신러닝을 이용한 전세 시세 예측
+설치 방법  <- 설명
+- Mac OS
+'''
+git clone ~~~
+virtualenv venv
+source venv/Script/Active
+'''
+- Windows
+- Ubuntu
+
+### Project 2. 컴퓨터 비전 or NLP
+
+### Project 3. Spring
