@@ -6,161 +6,177 @@ import matplotlib
 matplotlib.use('Agg')
 import plotly.graph_objects as go
 import geopandas as gp
-import datetime
-import json
-
-import matplotlib.pyplot as plt
-import tensorflow as tf
-from tensorflow import keras
-import seaborn as sns
-import joblib # 모델 내보내기
-import os
-  
+# import json
+# import matplotlib.pyplot as plt
+# import tensorflow as tf
+# from tensorflow import keras
+# import seaborn as sns
+# import joblib # 모델 내보내기
+# import os
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from stqdm import stqdm
+from time import sleep
 import warnings
 warnings.filterwarnings("ignore")
-
-# def run_predict():
-#     st.title('전세 예측')
-#     df = pd.read_csv('data/bds_data.csv', encoding='cp949')
-#     a = np.array(df['SGG_NM'].unique())
-#     gu = st.multiselect('지역구 선택',a ,default='강남구')
-#     sel_gu = []
-#     for i in gu:
-#         sel_gu.append(df[df['SGG_NM']==i]['BJDONG_NM'].unique())
-#     gu_idx1 = 0
-#     dong = []
-#     dic = {}
-#     for i in sel_gu:
-#         sel_dong = st.multiselect(f'{gu[gu_idx1]} 동 선택', i)
-#         dic.update({gu[gu_idx1] : sel_dong})
-#         gu_idx1 += 1
-#     fig = go.Figure()
-#     for gu in gu:
-#         for dong in dic[gu]:
-#             df2 = df[(df['SGG_NM']==gu) & (df['BJDONG_NM']==dong) & (df['HOUSE_GBN_NM']=='아파트') & (df['RENT_GBN']=='전세') & (df['CNTRCT_DE'] < '2023-01-01') & (df['CNTRCT_DE'] > '2022-01-01')]
-#             fig.add_scatter(x=df2['CNTRCT_DE'], y=df2['RENT_GTN'], name=dong)
-#     fig.update_layout(xaxis_title='날짜', yaxis_title='보증금(k=천만원)')
-#     st.plotly_chart(fig)
-#     m_df = pd.read_csv('data/bds_data.csv', encoding='euc-kr')
-#     m_gu = pd.read_csv('data/gu_j_d_mean.csv', encoding='euc-kr')
-#     geo = gp.read_file('data/layer1.json')
-#     st.header("지역구별 평균 실거래가 확인")
-#     with open('data/layer1.json', encoding='UTF-8') as f:
-#         data = json.load(f)
-#     for x in data['features']:
-#         x['id'] = x['properties']['SIG_KOR_NM']
-#     for idx, _ in enumerate(data['features']):
-#         print(data['features'][idx]['id'])
-#     mapper = [
-#     ('송파구', '송파구'),
-#     ('강남구', '강남구'),
-#     ('성동구', '성동구'),
-#     ('구로구', '구로구'),
-#     ('영등포구', '영등포구'),
-#     ('양천구', '양천구'),
-#     ('도봉구', '도봉구'),
-#     ('서초구', '서초구'),
-#     ('관악구', '관악구'),
-#     ('중구', '중구'),
-#     ('동대문구', '동대문구'),
-#     ('광진구', '광진구'),
-#     ('은평구', '은평구'),
-#     ('중랑구', '중랑구'),
-#     ('노원구', '노원구'),
-#     ('강동구', '강동구'),
-#     ('동작구', '동작구'),
-#     ('마포구', '마포구'),
-#     ('강북구', '강북구'),
-#     ('강서구', '강서구'),
-#     ('용산구', '용산구'),
-#     ('성북구', '성북구'),
-#     ('금천구', '금천구'),
-#     ('종로구', '종로구'),
-#     ('서대문구', '서대문구'),
-#     ]
-#     get_region = lambda SGG_NM: [x[1] for x in mapper if x[0] == SGG_NM][0]
-#     m_gu['geo_region'] = m_gu.SGG_NM.apply(get_region)
-#     cal = st.date_input('날짜를 선택하세요', datetime.date(2023,1,30))
-#     sel=m_gu[m_gu['CNTRCT_DE']== f'{cal}']
-#     fig = px.choropleth_mapbox(
-#         sel,
-#         geojson=data,
-#         locations='geo_region',
-#         color='RENT_GTN',
-#         color_continuous_scale=["orange", "red",
-#                                          "green", "blue",
-#                                          "purple"],
-#         # featureidkey="properties.CTP_KOR_NM", # featureidkey를 사용하여 id 값을 갖는 키값 지정
-#         mapbox_style="carto-positron",
-#         zoom=10,
-#         center = {"lat": 37.517, "lon": 127.047},
-#         opacity=0.6,
-#         labels={'RENT_GTN':'가격'}
-#     )
-#     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-#     # fig.show()
-#     st.plotly_chart(fig)
-
+from stqdm_model import stqdm_model
 
 def run_predict():
-    st.title('전세 예측')
+    # Create a progress bar
+    # Train the model
+    # for epoch in stqdm(range(100)):
+    #     # model.fit(X, y, epochs=1, verbose=0)
+    #     sleep(0.5)
+    # stqdm_model()
+
+    st.title("전세 예측:상승세인_차트:")
+    st.markdown("""
+    *※ 왼쪽 사이드바에 원하시는 메뉴를 선택하세요 ※*
+    """)
     df = pd.read_csv('data/bds_data.csv', encoding='cp949')
-    a = np.array(df['SGG_NM'].unique())
-    gu = st.multiselect('지역구 선택',a ,default='강남구')
-    sel_gu = []
-    for i in gu:
-        sel_gu.append(df[df['SGG_NM']==i]['BJDONG_NM'].unique())
-    gu_idx1 = 0
-    dong = []
-    dic = {}
-    for i in sel_gu:
-        sel_dong = st.multiselect(f'{gu[gu_idx1]} 동 선택', i)
-        dic.update({gu[gu_idx1] : sel_dong})
-        gu_idx1 += 1
-    fig = go.Figure()
-    for gu in gu:
-        for dong in dic[gu]:
-            df2 = df[(df['SGG_NM']==gu) & (df['BJDONG_NM']==dong) & (df['HOUSE_GBN_NM']=='아파트') & (df['RENT_GBN']=='전세') & (df['CNTRCT_DE'] < '2023-01-01') & (df['CNTRCT_DE'] > '2022-01-01')]
-            fig.add_scatter(x=df2['CNTRCT_DE'], y=df2['RENT_GTN'], name=dong)
-    fig.update_layout(xaxis_title='날짜', yaxis_title='보증금(k=천만원)')
-    st.plotly_chart(fig)
-    ef = "data/ef.geojson"
-    dgg = gp.read_file(ef,encoding='euc-kr')
-    dong_df1 = []
-    dong_df1.append(dgg['adm_nm'].unique())
-    ab = "data/dong_j_d_mean.csv"
-    dff =  pd.read_csv(ab,encoding='euc-kr')
-    date1 = st.date_input("날짜선택", datetime.date(2022,4,20))
-    date2 = st.selectbox("동선택", dgg['adm_nm'].unique())
-    st.write(date2)
-    st.write(type(date2))
-    map_dong = dgg[dgg['adm_nm'] == f'{date2}']
-    map_si = dff[dff['CNTRCT_DE'] == f'{date1}']
-    merged = map_dong.set_index('adm_nm').join(map_si.set_index('BJDONG_NM'))
-    fig = px.choropleth_mapbox(merged, geojson=merged.geometry, locations=merged.index, color="RENT_GTN", mapbox_style="carto-positron", zoom=9.8,
-    center = {"lat": 37.575651, "lon": 126.97689}, opacity=0.6)
-    fig.update_geos(fitbounds="locations", visible=True)
-    
-    if merged['RENT_GTN'].values > 0:
-        st.plotly_chart(fig)
+    df_copy = df.copy()
+    data = pd.read_csv('data/bds_data.csv', encoding='cp949')
+    sub_menu = ['전월세 월평균 그래프', '전월세 실거래수 지역 순위', '날짜별 거래', '전세예측']
+    sub_choice = st.sidebar.selectbox("메뉴", sub_menu)
+
+    now = datetime.now()
+    before_day = now - relativedelta(days=1)
+    before_month = before_day - relativedelta(months=1)
+    before_day = before_day.strftime("%Y-%m-%d")
+    before_month = before_month.strftime("%Y-%m-%d")
+    # before_month = now - relativedelta(months=1, days=1)
+
+    # gu = np.array(j_m_mean['SGG_NM'].unique())
+    if sub_choice == '전월세 월평균 그래프':
+        st.subheader("전월세 월평균 그래프")
+        t1, t2 = st.tabs(['전세 월평균 그래프', '월세 월평균 그래프'])
+        j_m_mean = pd.read_csv('data/gu_j_m_mean.csv', encoding='cp949')
+        w_m_mean = pd.read_csv('data/gu_w_m_mean.csv', encoding='cp949')
+        gu = np.array(j_m_mean['SGG_NM'].unique())
+        with t1:
+            c1 = st.checkbox('전세 월평균 그래프', True)
+            fig = go.Figure()
+            dic = {}
+            if c1:
+                fig = px.scatter(width=700)
+                for i in gu:
+                    dic.update({i : j_m_mean[j_m_mean['SGG_NM']==i]['RENT_GTN']})
+                for j in gu:
+                    df = j_m_mean[j_m_mean['SGG_NM']==j]
+                    fig.add_scatter(x=df['YM'], y=df['RENT_GTN'], name=j)
+                fig.update_layout(xaxis_title='날짜', yaxis_title='보증금(k=천만원)')
+                st.plotly_chart(fig)
+            else:
+                st.write(j_m_mean)
+        with t2:
+            c1 = st.checkbox('보증금 월평균 그래프', True)
+            
+            fig = go.Figure()
+            dic = {}
+            if c1:
+                fig = px.scatter(width=700, height=350)
+                for i in gu:
+                    dic.update({i : w_m_mean[w_m_mean['SGG_NM']==i]['RENT_GTN']})
+                for j in gu:
+                    df = w_m_mean[w_m_mean['SGG_NM']==j]
+                    fig.add_scatter(x=df['YM'], y=df['RENT_GTN'], name=j)
+                fig.update_layout(xaxis_title='날짜', yaxis_title='보증금(k=천만원)')
+                st.plotly_chart(fig)
+            else:
+                st.write(j_m_mean)
+                
+            c2 = st.checkbox('월세 월평균 그래프', True)
+            if c2:
+                fig = px.scatter(width=700, height=350)
+                for i in gu:
+                    dic.update({i : w_m_mean[w_m_mean['SGG_NM']==i]['RENT_GTN']})
+                for j in gu:
+                    df = w_m_mean[w_m_mean['SGG_NM']==j]
+                    fig.add_scatter(x=df['YM'], y=df['RENT_FEE'], name=j)
+                fig.update_layout(xaxis_title='날짜', yaxis_title='보증금(k=천만원)')
+                st.plotly_chart(fig)
+            else:
+                st.write(w_m_mean)
+                
+    elif sub_choice == '전월세 실거래수 지역 순위':
+        t1, t2 = st.tabs(['월세', '전세'])
+        with t1:
+            st.subheader("""
+            :달러:월세 실거래수 지역 순위
+            - *현재 월세 실거래수 TOP 10*:1등_메달:
+            """)
+
+            # 월세인 데이터 추출
+            data_m = data[(data['RENT_GBN'] == '월세') & (data['CNTRCT_DE']>=f'{before_month}')]
+            # 구, 동 합치기
+            cols = ['SGG_NM', 'BJDONG_NM']
+            data_m['주소'] = data_m[cols].apply(lambda row:' '.join(row.values.astype(str)),axis=1)
+            data_addr = data_m['주소'].value_counts().rename_axis('주소').reset_index(name='거래 수')
+            #인덱스 재지정
+            data_addr = data_addr.reset_index(drop=True)
+            data_addr.index = data_addr.index+1
+            # 그래프
+            c1 = st.checkbox('최근 한달 월세 실거래 수 지역 순위 그래프', True)
+            st.write('#### 기간 : ' + f'{before_month}' + ' ~ ' + f'{before_day}')
+            fig = go.Figure()
+            if c1:
+                fig = px.bar(x=data_addr.head(10)['주소'], y=data_addr.head(10)['거래 수'], width=700,
+                            color=data_addr.head(10)['주소'])
+                fig.update_layout(xaxis_title='지역 동', yaxis_title='개수')
+                st.plotly_chart(fig)
+            else:
+                # 데이터
+                st.write(data_addr.head(10))
+        # 전세 실거래 수 지역 순위(월세와 같은 방식)
+        with t2:
+            st.subheader("""
+            :신용_카드:전세 실거래수 지역 순위
+            - *현재 전세 실거래수 TOP10*:트로피:
+            """)
+            
+            data_m = data[(data['RENT_GBN'] == '전세') & (data['CNTRCT_DE']>=f'{before_month}')]
+            cols = ['SGG_NM', 'BJDONG_NM']
+            data_m['주소'] = data_m[cols].apply(lambda row:' '.join(row.values.astype(str)),axis=1)
+            data_addr = data_m['주소'].value_counts().rename_axis('주소').reset_index(name='거래 수')
+            data_addr = data_addr.reset_index(drop=True)
+            data_addr.index = data_addr.index+1
+            # 그래프
+            c1 = st.checkbox('최근 한달 전세 실거래 수 지역 순위 그래프', True)
+            st.write('#### 기간 : ' + f'{before_month}' + ' ~ ' + f'{before_day}')
+            fig = go.Figure()
+            if c1:
+                fig = px.bar(x=data_addr.head(10)['주소'], y=data_addr.head(10)['거래 수'], width=700,
+                            color=data_addr.head(10)['주소'])
+                fig.update_layout(xaxis_title='지역 동', yaxis_title='개수')
+                st.plotly_chart(fig)
+            else:
+                # 데이터
+                st.write(data_addr.head(10))
+    elif sub_choice == '날짜별 거래':
+        st.subheader("날짜별 거래")
+        
+        #map_df = gp.read_file(fp)
+        #map_df.to_crs(pyproj.CRS.from_epsg(4326), inplace=True)
+        # ab = "data/dong_j_d_mean.csv"
+        # dff =  pd.read_csv(ab,encoding='euc-kr')
+        date1 = st.date_input("날짜선택")
+        
+        dgg = gp.read_file("data/ef.geojson",encoding='euc-kr')
+        dff =  pd.read_csv("data/dong_j_d_mean.csv",encoding='euc-kr')
+        date2 = st.selectbox("동 선택", dgg['adm_nm'].unique())
+        map_dong = dgg[dgg['adm_nm'] == f'{date2}']
+        map_si = dff[dff['CNTRCT_DE'] == f'{date1}']
+        merged = map_dong.set_index('adm_nm').join(map_si.set_index('BJDONG_NM'))
+        fig = px.choropleth_mapbox(merged, geojson=merged.geometry, locations=merged.index, color="RENT_GTN", mapbox_style="carto-positron", zoom=9.8,
+        center = {"lat": 37.575651, "lon": 126.97689}, opacity=0.6)
+        fig.update_geos(fitbounds="locations", visible=True)
+        if  merged["RENT_GTN"].values > 0:
+            st.plotly_chart(fig)
+        else:
+            st.markdown('# 금일 거래는 없습니다.')
+            st.plotly_chart(fig)
     else:
-        st.write('금일 거래가 없습니다.')
-
-    dong_df2 = []
-    for i in dong_df1:
-        dong_df2.append(i)
-
-    
-
-    dong = st.selectbox("동선택", dong_df2)
-    jeonse = st.number_input('보증금 입력')
-    if '강남구' == dong:
-        model_file = 'models/gangnam.pkl'
-        loaded_model = joblib.load(open(os.path.join(model_file), 'rb'))
-        prediction = loaded_model.predict(jeonse)
-        pred_prob = loaded_model.predict_proba(jeonse)
-    
-    st.write(prediction)
-    st.write(pred_prob)
-
-
+        st.subheader("전세예측")
+        st.markdown('# 진행중~')
+        # s = st.selectbox(~~~)
+        # run_ml(s)
