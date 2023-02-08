@@ -185,7 +185,8 @@ def run_predict():
     else:
         # st.subheader("전세예측")
         # st.markdown('# 진행중~')
-        
+        # t1, t2 = 
+
         st.write("### 전세 -> 월세")
         c1, c2, c3 = st.columns([1,1,1])
 
