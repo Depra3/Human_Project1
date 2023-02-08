@@ -22,17 +22,11 @@ warnings.filterwarnings("ignore")
 from stqdm_model import stqdm_model
 
 def run_predict():
-    # Create a progress bar
-    # Train the model
-    # for epoch in stqdm(range(100)):
-    #     # model.fit(X, y, epochs=1, verbose=0)
-    #     sleep(0.5)
-    # stqdm_model()
-
     st.title("전세 예측:상승세인_차트:")
     st.markdown("""
     *※ 왼쪽 사이드바에 원하시는 메뉴를 선택하세요 ※*
     """)
+    nRe = 0
     df = pd.read_csv('data/bds_data.csv', encoding='cp949')
     df_copy = df.copy()
     data = pd.read_csv('data/bds_data.csv', encoding='cp949')
@@ -44,59 +38,77 @@ def run_predict():
     before_month = before_day - relativedelta(months=1)
     before_day = before_day.strftime("%Y-%m-%d")
     before_month = before_month.strftime("%Y-%m-%d")
-    # before_month = now - relativedelta(months=1, days=1)
 
-    # gu = np.array(j_m_mean['SGG_NM'].unique())
     if sub_choice == '전월세 월평균 그래프':
         st.subheader("전월세 월평균 그래프")
-        t1, t2 = st.tabs(['전세 월평균 그래프', '월세 월평균 그래프'])
         j_m_mean = pd.read_csv('data/gu_j_m_mean.csv', encoding='cp949')
         w_m_mean = pd.read_csv('data/gu_w_m_mean.csv', encoding='cp949')
         gu = np.array(j_m_mean['SGG_NM'].unique())
+        gu = st.multiselect('구를 선택하세요.', gu, default=['서초구', '강남구', '용산구'])
+        t1, t2 = st.tabs(['전세 월평균 그래프', '월세 월평균 그래프'])
         with t1:
             c1 = st.checkbox('전세 월평균 그래프', True)
             fig = go.Figure()
-            dic = {}
             if c1:
                 fig = px.scatter(width=700)
-                for i in gu:
-                    dic.update({i : j_m_mean[j_m_mean['SGG_NM']==i]['RENT_GTN']})
                 for j in gu:
                     df = j_m_mean[j_m_mean['SGG_NM']==j]
                     fig.add_scatter(x=df['YM'], y=df['RENT_GTN'], name=j)
                 fig.update_layout(xaxis_title='날짜', yaxis_title='보증금(k=천만원)')
                 st.plotly_chart(fig)
             else:
-                st.write(j_m_mean)
+                a = 0
+                for i in gu:
+                    jm = pd.DataFrame(j_m_mean[j_m_mean['SGG_NM']==i])
+                    if a == 0:
+                        js = jm
+                        a += 1
+                    else:
+                        js = pd.concat([js , jm])
+                st.write(js)
+
         with t2:
             c1 = st.checkbox('보증금 월평균 그래프', True)
             
             fig = go.Figure()
-            dic = {}
             if c1:
                 fig = px.scatter(width=700, height=350)
-                for i in gu:
-                    dic.update({i : w_m_mean[w_m_mean['SGG_NM']==i]['RENT_GTN']})
                 for j in gu:
                     df = w_m_mean[w_m_mean['SGG_NM']==j]
                     fig.add_scatter(x=df['YM'], y=df['RENT_GTN'], name=j)
                 fig.update_layout(xaxis_title='날짜', yaxis_title='보증금(k=천만원)')
                 st.plotly_chart(fig)
             else:
-                st.write(j_m_mean)
+                a = 0
+                for i in gu:
+                    wm = pd.DataFrame(w_m_mean[w_m_mean['SGG_NM']==i])
+                    wm = wm.drop(columns=['RENT_FEE'],axis=0)
+                    if a == 0:
+                        ws = wm
+                        a += 1
+                    else:
+                        ws = pd.concat([ws , wm])
+                st.write(ws)
                 
             c2 = st.checkbox('월세 월평균 그래프', True)
             if c2:
                 fig = px.scatter(width=700, height=350)
-                for i in gu:
-                    dic.update({i : w_m_mean[w_m_mean['SGG_NM']==i]['RENT_GTN']})
                 for j in gu:
                     df = w_m_mean[w_m_mean['SGG_NM']==j]
                     fig.add_scatter(x=df['YM'], y=df['RENT_FEE'], name=j)
                 fig.update_layout(xaxis_title='날짜', yaxis_title='보증금(k=천만원)')
                 st.plotly_chart(fig)
             else:
-                st.write(w_m_mean)
+                a = 0
+                for i in gu:
+                    wm = pd.DataFrame(w_m_mean[w_m_mean['SGG_NM']==i])
+                    wm = wm.drop(columns=['RENT_GTN'],axis=0)
+                    if a == 0:
+                        ws = wm
+                        a += 1
+                    else:
+                        ws = pd.concat([ws , wm])
+                st.write(ws)
                 
     elif sub_choice == '전월세 실거래수 지역 순위':
         t1, t2 = st.tabs(['월세', '전세'])
@@ -122,7 +134,7 @@ def run_predict():
             if c1:
                 fig = px.bar(x=data_addr.head(10)['주소'], y=data_addr.head(10)['거래 수'], width=700,
                             color=data_addr.head(10)['주소'])
-                fig.update_layout(xaxis_title='지역 동', yaxis_title='개수')
+                fig.update_layout(xaxis_title='지역 동', yaxis_title='거래 수')
                 st.plotly_chart(fig)
             else:
                 # 데이터
@@ -147,18 +159,13 @@ def run_predict():
             if c1:
                 fig = px.bar(x=data_addr.head(10)['주소'], y=data_addr.head(10)['거래 수'], width=700,
                             color=data_addr.head(10)['주소'])
-                fig.update_layout(xaxis_title='지역 동', yaxis_title='개수')
+                fig.update_layout(xaxis_title='지역 동', yaxis_title='거래 수')
                 st.plotly_chart(fig)
             else:
                 # 데이터
                 st.write(data_addr.head(10))
     elif sub_choice == '날짜별 거래':
         st.subheader("날짜별 거래")
-        
-        #map_df = gp.read_file(fp)
-        #map_df.to_crs(pyproj.CRS.from_epsg(4326), inplace=True)
-        # ab = "data/dong_j_d_mean.csv"
-        # dff =  pd.read_csv(ab,encoding='euc-kr')
         date1 = st.date_input("날짜선택")
         
         dgg = gp.read_file("data/ef.geojson",encoding='euc-kr')
@@ -176,7 +183,61 @@ def run_predict():
             st.markdown('# 금일 거래는 없습니다.')
             st.plotly_chart(fig)
     else:
-        st.subheader("전세예측")
-        st.markdown('# 진행중~')
-        # s = st.selectbox(~~~)
-        # run_ml(s)
+        # st.subheader("전세예측")
+        # st.markdown('# 진행중~')
+        
+        st.write("### 전세 -> 월세")
+        c1, c2, c3 = st.columns([1,1,1])
+
+        p1 = c1.empty()
+        p2 = c2.empty()
+        p3 = c3.empty()
+        with p1.container():
+            n1 = st.number_input("전월세 전환율 (%)", step=0.1)
+        with p2.container():
+            n2 = st.number_input("월세 보증금 (만원)", step=1)
+        with p3.container():
+            n3 = st.number_input("전세 보증금 (만원)", step=1)
+            nRe = ((n3-n2)*n1)/1200
+
+        n4 = st.number_input("월세 (만원)", step=0.1, value=nRe)
+        p1 = st.empty()
+        p2 = st.empty()
+        p3 = st.empty()
+
+        st.write('#   ')
+        st.write("### 월세 -> 전세")
+        c4, c5, c6 = st.columns([1,1,1])
+        p4 = c4.empty()
+        p5 = c5.empty()
+        p6 = c6.empty()
+        with p4.container():
+            u1 = st.number_input("전월세 전환율 (%) ", step=0.1)
+        with p5.container():
+            u2 = st.number_input("월세 보증금 (원) ", step=1)
+        with p6.container():
+            u3 = st.number_input("월세 (원) ", step=0.1)
+        u4 = st.number_input("전세 보증금 (원) ", step=1)
+        p4 = st.empty()
+        p5 = st.empty()
+        p6 = st.empty()
+
+        st.write('#   ')
+        st.write("### 전환율 계산")
+        c7, c8, c9 = st.columns([1,1,1])
+        p7 = c7.empty()
+        p8 = c8.empty()
+        p9 = c9.empty()
+        with p7.container():
+            m1 = st.number_input("월세 보증금 (원)  ", min_value=0, step=1)
+        with p8.container():
+            m2 = st.number_input("전세 보증금 (원)  ", min_value=0, step=1)
+        with p9.container():
+            m3 = st.number_input("월세 (원)  ", step=0.1)
+        m4 = st.number_input("전월세 전환율 (%)  ", step=0.1)
+        p7 = st.empty()
+        p8 = st.empty()
+        p9 = st.empty()
+        
+        
+       
