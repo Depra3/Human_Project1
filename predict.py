@@ -6,13 +6,6 @@ import matplotlib
 matplotlib.use('Agg')
 import plotly.graph_objects as go
 import geopandas as gp
-# import json
-# import matplotlib.pyplot as plt
-# import tensorflow as tf
-# from tensorflow import keras
-# import seaborn as sns
-# import joblib # 모델 내보내기
-# import os
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from stqdm import stqdm
