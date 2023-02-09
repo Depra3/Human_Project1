@@ -6,6 +6,7 @@ import matplotlib
 matplotlib.use('Agg')
 import plotly.graph_objects as go
 import geopandas as gp
+
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from stqdm import stqdm
@@ -13,6 +14,7 @@ from time import sleep
 import warnings
 warnings.filterwarnings("ignore")
 from stqdm_model import stqdm_model
+from ml2 import prediction2
 
 def run_predict():
     st.markdown("""
@@ -22,7 +24,7 @@ def run_predict():
     df = pd.read_csv('data/bds_data.csv', encoding='cp949')
     df_copy = df.copy()
     data = pd.read_csv('data/bds_data.csv', encoding='cp949')
-    sub_menu = ['전월세 월평균 그래프', '전월세 실거래수 지역 순위', '날짜별 거래', '전세예측', '전월세 전환율/대출이자 계산기']
+    sub_menu = ['전월세 월평균 그래프', '전월세 실거래수 지역 순위', '날짜별 거래', '전세 예측', '전월세 전환율/대출이자 계산기']
     sub_choice = st.sidebar.selectbox("메뉴", sub_menu)
 
     now = datetime.now()
@@ -176,8 +178,8 @@ def run_predict():
             st.plotly_chart(fig)
     elif sub_choice == '전세 예측':
 
-        st.subheader("전세예측")
-        st.markdown('# 진행중~')
+        st.subheader("전세 예측")
+        prediction2()
         
     elif sub_choice == '전월세 전환율/대출이자 계산기':
         # 전월세 전환율 계산기 / 이자 계산
@@ -303,33 +305,3 @@ def run_predict():
         p11 = st.empty()
         p12 = st.empty()
         p13 = st.empty()
-        
-        
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-

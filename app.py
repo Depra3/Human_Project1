@@ -14,6 +14,7 @@ st.title('내 방 어디?')
 from search import run_search
 from predict import run_predict
 from suggestions import run_suggestions
+from chatbot_a.chatbot import chatrun
 
 selected3 = option_menu(None, ["🏠Home", "🔎전월세 검색",  "📊전세 예측", '💬건의사항'], 
     # icons=['house', 'cloud-upload', "list-task", 'gear'], 
@@ -75,6 +76,9 @@ elif selected3 == "🔎전월세 검색":
 # 전세 시세 예측 탭 
 elif selected3 == "📊전세 예측":
     run_predict()
+
+elif selected3 == "🤖챗봇":
+    chatrun()
 
 # 건의사항 탭
 elif selected3 == "💬건의사항":
