@@ -38,15 +38,6 @@ def prediction2():
     list = df_bds1['SGG_NM'].unique()
     date = df_bds1['CNTRCT_DE'].max()
     
-    
-    # PATH = 'data/'
-    # file_list = os.listdir(PATH + 'ml_data')
-    # list = []
-    # for i in file_list:
-    #     a = i.split('.')[0]
-    #     if a !='':
-    #         list.append(a)
-    # list
     s = st.selectbox('원하는 구를 선택하세요',(list))
     tab1, tab2 = st.tabs(['Tab 1', 'Tab 2'])
     with tab1:

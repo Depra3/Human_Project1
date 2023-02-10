@@ -9,11 +9,8 @@ import geopandas as gp
 
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from stqdm import stqdm
-from time import sleep
 import warnings
 warnings.filterwarnings("ignore")
-from stqdm_model import stqdm_model
 from ml2 import prediction2
 from update import update_data
 from mean_db import dong_j_d_mean, gu_j_d_mean, gu_j_m_mean, gu_w_d_mean, gu_w_m_mean
@@ -67,6 +64,8 @@ def run_predict():
                         a += 1
                     else:
                         js = pd.concat([js , jm])
+                
+                js.rename(columns={'SGG_NM' : '지역구 이름', 'YM' : '년월', 'RENT_GTN' : '보증금'}, inplace=True)
                 st.write(js)
 
         with t2:
@@ -90,6 +89,7 @@ def run_predict():
                         a += 1
                     else:
                         ws = pd.concat([ws , wm])
+                ws.rename(columns={'SGG_NM' : '지역구 이름', 'YM' : '년월', 'RENT_GTN' : '보증금'}, inplace=True)
                 st.write(ws)
                 
             c2 = st.checkbox('월세 월평균 그래프', True)
@@ -110,6 +110,7 @@ def run_predict():
                         a += 1
                     else:
                         ws = pd.concat([ws , wm])
+                ws.rename(columns={'SGG_NM' : '지역구 이름', 'YM' : '년월', 'RENT_FEE' : '월세'}, inplace=True)
                 st.write(ws)
     
     elif sub_choice == '전월세 실거래수 지역 순위':
