@@ -6,7 +6,6 @@ import matplotlib
 matplotlib.use('Agg')
 import plotly.graph_objects as go
 import geopandas as gp
-
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import warnings
