@@ -15,15 +15,22 @@ import warnings
 warnings.filterwarnings("ignore")
 from stqdm_model import stqdm_model
 from ml2 import prediction2
+from update import update_data
+from mean_db import dong_j_d_mean, gu_j_d_mean, gu_j_m_mean, gu_w_d_mean, gu_w_m_mean
 
 def run_predict():
     st.markdown("""
     *※ 왼쪽 사이드바에 원하시는 메뉴를 선택하세요 ※*
     """)
     
-    df = pd.read_csv('data/bds_data.csv', encoding='cp949')
+    # df = pd.read_csv('data/bds_data.csv', encoding='cp949')
+    df = update_data()
+    df = pd.DataFrame(df)
     df_copy = df.copy()
-    data = pd.read_csv('data/bds_data.csv', encoding='cp949')
+    # data = pd.read_csv('data/bds_data.csv', encoding='cp949')
+    data = df
+    st.write(df)
+    
     sub_menu = ['전월세 월평균 그래프', '전월세 실거래수 지역 순위', '날짜별 거래', '전세 예측', '전월세 전환율/대출이자 계산기']
     sub_choice = st.sidebar.selectbox("메뉴", sub_menu)
 
@@ -35,8 +42,10 @@ def run_predict():
 
     if sub_choice == '전월세 월평균 그래프':
         st.subheader("전월세 월평균 그래프")
-        j_m_mean = pd.read_csv('data/gu_j_m_mean.csv', encoding='cp949')
-        w_m_mean = pd.read_csv('data/gu_w_m_mean.csv', encoding='cp949')
+        # j_m_mean = pd.read_csv('data/gu_j_m_mean.csv', encoding='cp949')
+        j_m_mean = gu_j_m_mean(df)
+        # w_m_mean = pd.read_csv('data/gu_w_m_mean.csv', encoding='cp949')
+        w_m_mean = gu_w_m_mean(df)
         gu = np.array(j_m_mean['SGG_NM'].unique())
         gu = st.multiselect('구를 선택하세요.', gu, default=['서초구', '강남구', '용산구'])
         t1, t2 = st.tabs(['전세 월평균 그래프', '월세 월평균 그래프'])
@@ -163,7 +172,8 @@ def run_predict():
         date1 = st.date_input("날짜선택")
         
         dgg = gp.read_file("data/ef.geojson",encoding='euc-kr')
-        dff =  pd.read_csv("data/dong_j_d_mean.csv",encoding='euc-kr')
+        # dff =  pd.read_csv("data/dong_j_d_mean.csv",encoding='euc-kr')
+        dff = dong_j_d_mean(df)
         date2 = st.selectbox("동 선택", dgg['adm_nm'].unique())
         map_dong = dgg[dgg['adm_nm'] == f'{date2}']
         map_si = dff[dff['CNTRCT_DE'] == f'{date1}']
@@ -265,19 +275,19 @@ def run_predict():
         if e == '원리금균등상환':
             # e5 = st.number_input('매월 상환금 (원금 + 이자) (원)', step=0.1, value=float(eRe1))
             st.write('매월 상환금 (원금 + 이자)')
-            st.success(str(f'{eRe1:.2f}') + '만원')
+            st.success(str(f'{eRe1:.0f}') + '원')
         else:
             ce1, ce2 = st.columns([1,1])
             pe1 = ce1.empty()
             pe2 = ce2.empty()
             with pe1:
                 # e5 = st.number_input('총 이자 금액', step=0.1, value=float(eRe1))
-                st.write('총 이자 금액')
-                st.success(str(f'{eRe1:.0f}') + '원')
+                # st.write('총 이자 금액')
+                st.success('총 이자 금액　　　　　　　　　' + str(f'{eRe1:.0f}') + '원')
             with pe2:
                 # e6 = st.number_input('월별 이자 금액', step=0.1, value=float(eRe2))
-                st.write('월별 이자 금액')
-                st.success(str(f'{eRe2:.0f}') + '원')
+                # st.write('월별 이자 금액')
+                st.success('월별 이자 금액　　　　　　　　　' + str(f'{eRe2:.0f}') + '원')
             p7 = st.empty()
             p8 = st.empty()
             p9 = st.empty()
