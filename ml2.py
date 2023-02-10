@@ -38,13 +38,13 @@ def prediction2():
     list = df_bds1['SGG_NM'].unique()
     date = df_bds1['CNTRCT_DE'].max()
     
-    s = st.selectbox('원하는 구를 선택하세요',(list))
+    gu = st.selectbox('원하는 구를 선택하세요', list)
     tab1, tab2 = st.tabs(['Tab 1', 'Tab 2'])
     with tab1:
     # 예측모델 1
-        check = st.checkbox(f'{s} '"실거래가 예측 수치로 보기 1")
+        check = st.checkbox(f'{gu} 실거래가 예측 수치로 보기 1')
         # data1 = pd.read_csv(PATH + 'ml_data/' + s + '.csv', encoding='cp949', index_col=False)
-        data1 = ml_data(s)
+        data1 = ml_data(gu)
         df_train = data1[['CNTRCT_DE', 'RENT_GTN']]
         df_train = df_train.rename(columns={"CNTRCT_DE": "ds", "RENT_GTN": "y"})
         m = Prophet()
@@ -58,13 +58,13 @@ def prediction2():
         y_truedates = dates[:len(dates)-30, ]
         y_predates = dates[len(dates)-30:, ]
         if check:
-            st.subheader(f'{s} ''실거래가 예측 수치')
+            st.subheader(f'{gu} 실거래가 예측 수치')
             st.write(forecast.loc[forecast['ds'] > date, ['ds','yhat']])
-            st.write("👉 ds: 날짜 ,"'yhat: 예측가')
+            st.write("👉 ds: 날짜 , yhat: 예측가")
         else:
-            st.subheader(f'{s} ''실거래가 예측 그래프')
+            st.subheader(f'{gu} 실거래가 예측 그래프')
             fig, ax = plt.subplots()
-            ax.plot(y_truedates, forecast.loc[forecast['ds'] <= date, ['trend']],label='past')
+            ax.plot(y_truedates, forecast.loc[forecast['ds'] <= date, ['trend']], label='past')
             ax.fill_between(x = y_truedates, 
                             y1=forecast.loc[forecast['ds'] <= date, ['yhat_lower']]['yhat_lower'], 
                             y2=forecast.loc[forecast['ds'] <= date, ['yhat_upper']]['yhat_upper'], 
@@ -85,9 +85,9 @@ def prediction2():
 
     with tab2:
     # 예측 모델 2
-        check2 = st.checkbox(f'{s} '"실거래가 예측 수치로 보기 2")
+        check2 = st.checkbox(f'{gu} 실거래가 예측 수치로 보기 2')
         # data2 = pd.read_csv(PATH + 'ml_data/' + s + '.csv', encoding='cp949', index_col=0)
-        data2 = ml_data(s).set_index('CNTRCT_DE')
+        data2 = ml_data(gu).set_index('CNTRCT_DE')
         y = data2['RENT_GTN'].fillna(method='ffill').values.reshape(- 1, 1)
 
         # 피처 엔지니어링
@@ -156,12 +156,12 @@ def prediction2():
 
         results = df_past.append(df_future).set_index('Date')
         if check2:
-            st.subheader(f'{s} ''실거래가 예측 수치')
+            st.subheader(f'{gu} 실거래가 예측 수치')
             st.write(df_future[['Date','Forecast']])
-            st.write("👉 Date: 날짜 ,"'Forecast: 예측가')
+            st.write("👉 Date: 날짜 , Forecast: 예측가")
             
         else:
-            st.subheader(f'{s} ''실거래가 예측 그래프') 
+            st.subheader(f'{gu} 실거래가 예측 그래프') 
             fig, ax = plt.subplots()
             ax.plot(results['RENT_GTN'], label='past')
             ax.plot(results['Forecast'],label='prediction')

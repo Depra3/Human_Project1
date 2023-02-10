@@ -121,7 +121,7 @@ def run_suggestions():
                         delete_sugg(author, pword, title)
  
 
-     # 검색
+    # 검색
     with st.expander("검색"):
         cols = st.columns((1,1))
         search_term = cols[0].text_input(' ')
