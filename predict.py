@@ -28,6 +28,8 @@ def run_predict():
     before_day = before_day.strftime("%Y-%m-%d")
     before_month = before_month.strftime("%Y-%m-%d")
 
+    st.markdown("⚠️사실과 다를 수 있습니다.")
+
     if sub_choice == '전월세 월평균 그래프':
         st.subheader("전월세 월평균 그래프")
         j_m_mean = gu_j_m_mean(df)

@@ -3,13 +3,13 @@
 ## Project : 내방 어디?
 - 폴더 링크 : [Project_1](https://github.com/Depra3/Human_Project1)
 - 배포 링크 : [내 방, 어디?](https://depra3-human-project1-app-kbirqs.streamlit.app/)
-- 기간 : 2022.01.27 ~ 2023.00.00
-- 사용 언어 : Python
-- 사용 Tool : VS code, Google Colab
-- 라이브러리 Version
+- 기간 : `2022.01.27 ~ 2023.02.10`
+- 사용 언어 : `Python (3.9.13)`
+- 사용 Tool : `VS code (1.74.1)`, `Google Colab`
+- 라이브러리 `Version`
     + `pandas (1.5.3)`, `numpy (1.24.1)`, `plotly (5.13.0)`, `matplotlib (3.6.3)`, `streamlit (1.17.0)`, `streamlit-option-menu (0.3.2)`, `geopandas (0.12.2)`, `joblib (1.2.0)`, `scikit-learn (1.2.1)`, `tensorflow (2.9.0)`, `seaborn (0.12.2)`, `geopandas (0.12.2)`, `pydeck (0.8.0)`, `prophet (1.1.2)`, `openai (0.26.5)`, `streamlit_chat (0.0.2.1)`, `requests (2.28.2)`
 - 내용 : 서울시 전/월세 실거래 데이터를 기반한 검색, 머신러닝을 이용한 전세 시세 예측
-
+***
 ## Project 개요
 <details>
 <summary><h4>2023/01/27</h4></summary>
@@ -198,5 +198,123 @@
         - 전세 및 월세 실거래가 데이터 전처리
         - 전세 및 월세 실거래가 계산 레이아웃 구현
         - 지도 시각화 수정
+</div>
+</details>
+
+<details>
+<summary><h4>2023/02/06</h4></summary>
+<div markdown="1">
+
+- 개발팀
+    + 오늘 한 것
+        - BigQuery를 통한 data cloud 구현 시도
+    + 오늘 못한 것
+        - 실시간 데이터 수집(api로 받기)
+    + 내일 할 것
+        - 실시간 데이터 수집
+        - 홈페이지 기능 재배치
+- 데이터팀
+    + 오늘 한 것
+        - json 파일 geojson으로 변경
+        - csv파일과 json파일 병합
+        - 지도 시각화 구현(완료)
+        - 실거래가 머신러닝 코드 분석(진행중)
+        - 실거래가 데이터 전처리 진행(완료)
+    + 오늘 못한 것
+        - 실거래가 머신러닝 코드 구현(진행중)
+        - 전세 및 월세 실거래가 계산 레이아웃 구현(진행중)
+    + 내일 할 것
+        - 실거래가 머신러닝 코드 구현
+        - 전세 및 월세 실거래가 계산 레이아웃 구현
+</div>
+</details>
+
+<details>
+<summary><h4>2023/02/07</h4></summary>
+<div markdown="1">
+
+- 개발팀
+    + 오늘 한 것
+        - 홈페이지 재배치
+        - 검색 slider에 scale 추가
+        - API data를 DB에 연결
+    + 오늘 못한 것
+        - 실시간 데이터 수집
+            + batch process 구현
+    + 내일 할 것
+        - batch process 구현
+- 데이터팀
+    + 오늘 한 것
+        - 실거래가 머신러닝 코드 구현1(완료)
+        - 실거래가 머신러닝 코드 분석(완료)
+        - 전세 및 월세 실거래가 계산 레이아웃 구현(진행중)
+    + 오늘 못한 것
+        - 실거래가 머신러닝 코드 구현2(진행중)
+        - 전세 및 월세 실거래가 계산 레이아웃 구현(진행중)
+    + 내일 할 것
+        - 실거래가 머신러닝 코드 구현2
+        - 전세 및 월세 실거래가 계산 코드 작성
+</div>
+</details>
+
+<details>
+<summary><h4>2023/02/08</h4></summary>
+<div markdown="1">
+
+- 개발팀
+    + 오늘 한 것
+        - 배치파일을 이용한 실시간 데이터 수집
+        - 실시간 데이터받는 중 서치.py에 버그 수정
+            + (받아오는 데이터들이 StringType이여서 int형으로 변환)
+        - 각 기능 설명 추가
+        - 건의사항 UI 기능추가(진행중) 및 변경
+    + 오늘 못한 것
+        - 전월세 검색 페이지 버그 수정
+    + 내일 할 것
+        - 전월세 검색 페이지에 조회버튼 버그 수정
+        - 배치파일을 이용해 update되는지 확인
+- 데이터팀
+    + 오늘 한 것
+        - LSTM 예측 모델 보완
+        - prophet 예측 모델 완성
+        - 그래프 레이아웃 시각화 수정( 구 선택 추가 )
+        - ChatBot 데이터 연동
+        - 전월세 전환 계산 1 구현 ( 전세 --> 월세 )
+    + 오늘 못한 것
+        - 머신러닝 시각화 레이아웃 수정
+        - 전월세 전환 계산 2,3 구현( 월세--> 전세, 전환율 계산)
+    + 내일 할 것
+        - ChatBot 데이터 수정
+        - 머신러닝 시각화 레이아웃 수정
+        - 전월세 전환 계산 2,3 구현( 월세--> 전세, 전환율 계산)
+</div>
+</details>
+
+<details>
+<summary><h4>2023/02/09</h4></summary>
+<div markdown="1">
+
+- 개발팀, 데이터팀
+    + 오늘 한 것
+        - streamlit 배포
+        - 시스템 통합
+    + 오늘 못한 것
+        - 시스템 통합
+        - 버그 수정
+    + 내일 할 것
+        - 시스템 통합
+        - 버그 수정
+</div>
+</details>
+
+<details>
+<summary><h4>2023/02/10</h4></summary>
+<div markdown="1">
+
+- 개발팀, 데이터팀
+    + 오늘 한 것
+        - 버그 수정
+        - 시스템 통합
+        - 마무리
 </div>
 </details>
