@@ -11,12 +11,20 @@
 - 내용 : 서울시 전/월세 실거래 데이터를 기반한 검색, 머신러닝을 이용한 전세 시세 예측
 
 ### Project 개요
+<details>
+<summary><h4>2023/01/27</h4></summary>
+<div markdown="1">
 
-#### 2023/01/27
 - 주제 선정
     + 부동산 전/월세 관련 내용
+</div>
+</details>
 
-#### 2023/01/30
+
+<details>
+<summary><h4>2023/01/30</h4></summary>
+<div markdown="1">
+
 - 개발팀
     + 오늘 한 내용
         - streamlit 배포
@@ -43,15 +51,25 @@
         - 데이터 전처리
         - 데이터 시각화
         - 시나리오 재작성
+</div>
+</details>
 
-#### 2023/01/31
+<details>
+<summary><h4>2023/01/31</h4></summary>
+<div markdown="1">
+
 - 데이터 처리 방법 선택
     + API를 이용하여 DB에 저장
 - 웹개발 프레임워크 선택 (`Flask` or `Streamlit`)
     + 보다 쉬워보이는 `Streamlit`로 선택
 - 전체 시나리오 구상
+</div>
+</details>
 
-#### 2023/02/01
+<details>
+<summary><h4>2023/02/01</h4></summary>
+<div markdown="1">
+
 - 개발팀
     + 오늘 한 내용
         - Index 페이지 
@@ -97,8 +115,13 @@
         - 구, 동 별 일일 평균 시각화 코드 작성
         - 막대 및 지도 시각화
         - 시나리오 보충
+</div>
+</details>
 
-#### 2023/02/02
+<details>
+<summary><h4>2023/02/02</h4></summary>
+<div markdown="1">
+
 - 개발팀
     + 오늘 한 것
         - homepage UI 디자인변경
@@ -134,8 +157,13 @@
         - 구, 동 별 일일 평균 시각화 코드 작성
         - 막대 및 지도 시각화
         - 시나리오 보충(도식화)
+</div>
+</details>
 
-#### 2023/02/03
+<details>
+<summary><h4>2023/02/03</h4></summary>
+<div markdown="1">
+
 - 개발팀
     + 오늘 한 것
         - 검색 페이지 슬라이더 기능 조정
@@ -171,3 +199,5 @@
         - 전세 및 월세 실거래가 데이터 전처리
         - 전세 및 월세 실거래가 계산 레이아웃 구현
         - 지도 시각화 수정
+</div>
+</details>
