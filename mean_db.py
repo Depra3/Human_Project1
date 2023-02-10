@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import sqlite3
-import streamlit as st
 
 # 구별 전세 일 평균
 def gu_j_d_mean(df_bds):
@@ -45,9 +44,6 @@ def dong_j_d_mean(df_bds):
 def ml_data(gu):
     dbConn=sqlite3.connect("data/mydata.db")
     df_bds1 = pd.read_sql_query('SELECT * FROM budongsan2', dbConn)
-    # cs=dbConn.cursor()
-    # cs.execute('SELECT * FROM budongsan2')
-    # df_bds = cs.fetchall()
     dbConn.close()
 
     df_bds2 = pd.DataFrame(df_bds1)

@@ -20,8 +20,7 @@ def run_predict():
     """)
     
     # df = pd.read_csv('data/bds_data.csv', encoding='cp949')
-    df = update_data()
-    df = pd.DataFrame(df)
+    df = pd.DataFrame(update_data())
     df_copy = df.copy()
     # data = pd.read_csv('data/bds_data.csv', encoding='cp949')
     data = df
@@ -171,7 +170,7 @@ def run_predict():
         dgg = gp.read_file("data/ef.geojson",encoding='euc-kr')
         # dff =  pd.read_csv("data/dong_j_d_mean.csv",encoding='euc-kr')
         dff = dong_j_d_mean(df)
-        date2 = st.selectbox("동 선택", dgg['adm_nm'].unique())
+        date2 = st.selectbox("동 선택", dff['BJDONG_NM'].unique())
         map_dong = dgg[dgg['adm_nm'] == f'{date2}']
         map_si = dff[dff['CNTRCT_DE'] == f'{date1}']
         merged = map_dong.set_index('adm_nm').join(map_si.set_index('BJDONG_NM'))

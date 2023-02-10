@@ -16,7 +16,7 @@ from suggestions import run_suggestions
 from chatbot_a.chatbot import chatrun
 from update import update_data
 
-selected3 = option_menu(None, ["🏠Home", "🔎전월세 검색",  "📊전세 예측", "🤖챗봇", '💬건의사항'], 
+selected = option_menu(None, ["🏠Home", "🔎전월세 검색",  "📊전세 예측", "🤖챗봇", '💬건의사항'], 
     # icons=['house', 'cloud-upload', "list-task", 'gear'], 
     menu_icon="cast", default_index=0, orientation="horizontal",
     styles={
@@ -28,7 +28,7 @@ selected3 = option_menu(None, ["🏠Home", "🔎전월세 검색",  "📊전세 
 )
 
 # 홈 탭
-if selected3 == "🏠Home":
+if selected == "🏠Home":
     data = update_data()
     # data = pd.read_csv('data/bds_data.csv', encoding='cp949')
 
@@ -67,18 +67,18 @@ if selected3 == "🏠Home":
 
     
 # 전월세 검색 탭
-elif selected3 == "🔎전월세 검색":
+elif selected == "🔎전월세 검색":
     run_search()
 
 # 전세 시세 예측 탭 
-elif selected3 == "📊전세 예측":
+elif selected == "📊전세 예측":
     run_predict()
 
-elif selected3 == "🤖챗봇":
+elif selected == "🤖챗봇":
     chatrun()
 
 # 건의사항 탭
-elif selected3 == "💬건의사항":
+elif selected == "💬건의사항":
     run_suggestions()
 else:
-    selected3 == "🏠Home"
+    selected == "🏠Home"
