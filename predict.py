@@ -116,7 +116,7 @@ def run_predict():
         t1, t2 = st.tabs(['월세', '전세'])
         with t1:
             st.subheader("""
-            :달러:월세 실거래수 지역 순위
+            월세 실거래수 지역 순위
             """)
 
             # 월세인 데이터 추출
@@ -143,8 +143,7 @@ def run_predict():
         # 전세 실거래 수 지역 순위(월세와 같은 방식)
         with t2:
             st.subheader("""
-            :신용_카드:전세 실거래수 지역 순위
-            - *현재 전세 실거래수 TOP10*:트로피:
+            전세 실거래수 지역 순위
             """)
             
             data_m = data[(data['RENT_GBN'] == '전세') & (data['CNTRCT_DE']>=f'{before_month}')]
