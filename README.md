@@ -19,6 +19,7 @@
     + 부동산 전/월세 관련 내용
 </div>
 </details>
+
 <details>
 <summary><h4>2023/01/30</h4></summary>
 <div markdown="1">
@@ -51,6 +52,7 @@
         - 시나리오 재작성
 </div>
 </details>
+
 <details>
 <summary><h4>2023/01/31</h4></summary>
 <div markdown="1">
@@ -62,6 +64,7 @@
 - 전체 시나리오 구상
 </div>
 </details>
+
 <details>
 <summary><h4>2023/02/01</h4></summary>
 <div markdown="1">
@@ -113,6 +116,7 @@
         - 시나리오 보충
 </div>
 </details>
+
 <details>
 <summary><h4>2023/02/02</h4></summary>
 <div markdown="1">
@@ -154,6 +158,7 @@
         - 시나리오 보충(도식화)
 </div>
 </details>
+
 <details>
 <summary><h4>2023/02/03</h4></summary>
 <div markdown="1">
