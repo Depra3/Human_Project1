@@ -15,6 +15,7 @@ from search import run_search
 from predict import run_predict
 from suggestions import run_suggestions
 from chatbot_a.chatbot import chatrun
+from update import update_data
 
 selected3 = option_menu(None, ["🏠Home", "🔎전월세 검색",  "📊전세 예측", "🤖챗봇", '💬건의사항'], 
     # icons=['house', 'cloud-upload', "list-task", 'gear'], 
@@ -29,7 +30,8 @@ selected3 = option_menu(None, ["🏠Home", "🔎전월세 검색",  "📊전세 
 
 # 홈 탭
 if selected3 == "🏠Home":
-    data = pd.read_csv('data/bds_data.csv', encoding='cp949')
+    data = update_data()
+    # data = pd.read_csv('data/bds_data.csv', encoding='cp949')
     data2 = data.copy()
     po = data2['SGG_NM'] == '영등포구'
     tel = data2['HOUSE_GBN_NM'] == '아파트'

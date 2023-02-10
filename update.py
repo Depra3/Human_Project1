@@ -182,4 +182,9 @@ def update_data():
     
     return df_bds
 
+if __name__ == "__main__":
+    run_update()
+    update_data()
+    print("확인")
+
 
