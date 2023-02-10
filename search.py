@@ -168,6 +168,9 @@ def run_search():
             type_search = (data['RENT_GBN'] == type_select)
         rent_gtn_search = (data['RENT_GTN'] >= rent_gtn_select[0]) & (data['RENT_GTN'] <= rent_gtn_select[1])
         rent_fee_search = (data['RENT_FEE'] >= rent_fee_select[0]) & (data['RENT_FEE'] <= rent_fee_select[1])
+
+        data['RENT_GTN'] = pd.to_numeric(data['RENT_GTN'])
+        data['RENT_FEE'] = pd.to_numeric(data['RENT_FEE'])
         # 면적 최솟값, 최댓값 평 -> 제곱미터 변환
         rent_area_min = rent_area_select[0] * 3.3058
         rent_area_max = rent_area_select[1] * 3.3058
