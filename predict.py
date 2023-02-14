@@ -14,11 +14,11 @@ from ml2 import prediction2
 from update import update_data
 from mean_db import dong_j_d_mean, gu_j_d_mean, gu_j_m_mean, gu_w_d_mean, gu_w_m_mean
 
-def run_predict():
+def run_predict(df):
     st.markdown("""
     *※ 왼쪽 사이드바에 원하시는 메뉴를 선택하세요 ※*
     """)
-    df = pd.DataFrame(update_data())    
+    # df = pd.DataFrame(update_data())
     sub_menu = ['전월세 월평균 그래프', '전월세 실거래수 지역 순위', '날짜별 거래', '전세 예측', '전월세 전환율/대출이자 계산기']
     sub_choice = st.sidebar.selectbox("메뉴", sub_menu)
 
