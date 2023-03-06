@@ -23,9 +23,9 @@
 - 기간 : `2022.01.27 ~ 2023.02.10`
 - 사용 언어 : <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=Python&logoColor=white"/> `(3.9.13)`
 - 사용 Tool : <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=Python&logoColor=white"/> `(1.74.1)`, `Google Colab`
-- 사용 DB : <img src="https://img.shields.io/badge/SQLite-003B57?style=flat&logo=SQLite&logoColor=white"/> `()`
+- 사용 DB : <img src="https://img.shields.io/badge/SQLite-003B57?style=flat&logo=SQLite&logoColor=white"/> `(2.6.0)`
 - 라이브러리 `Version`
-    + `pandas (1.5.3)`, `numpy (1.24.1)`, `plotly (5.13.0)`, `matplotlib (3.6.3)`, `streamlit (1.17.0)`, `streamlit-option-menu (0.3.2)`, `geopandas (0.12.2)`, `joblib (1.2.0)`, `scikit-learn (1.2.1)`, `tensorflow (2.9.0)`, `seaborn (0.12.2)`, `geopandas (0.12.2)`, `pydeck (0.8.0)`, `prophet (1.1.2)`, `openai (0.26.5)`, `streamlit_chat (0.0.2.1)`, `requests (2.28.2)`,`sqlite()`
+    + `pandas (1.5.3)`, `numpy (1.24.1)`, `plotly (5.13.0)`, `matplotlib (3.6.3)`, `streamlit (1.17.0)`, `streamlit-option-menu (0.3.2)`, `geopandas (0.12.2)`, `joblib (1.2.0)`, `scikit-learn (1.2.1)`, `tensorflow (2.9.0)`, `seaborn (0.12.2)`, `geopandas (0.12.2)`, `pydeck (0.8.0)`, `prophet (1.1.2)`, `openai (0.26.5)`, `streamlit_chat (0.0.2.1)`, `requests (2.28.2)`,`sqlite(2.6.0)`
 ***
 ## 기간 상세
 <details>
