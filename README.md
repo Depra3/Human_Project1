@@ -20,7 +20,7 @@
 
 ## Project 개요
 - 인원 : 4명
-- 기간 : `2022.01.27 ~ 2023.02.10`
+- 기간 : `2023.01.27 ~ 2023.02.10`
 - 사용 언어 : <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=Python&logoColor=white"/> `(3.9.13)`
 - 사용 Tool : <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=Python&logoColor=white"/> `(1.74.1)`, <img src="https://img.shields.io/badge/Google Colab-F9AB00?style=flat&logo=Google Colab&logoColor=white"/>
 - 사용 DB : <img src="https://img.shields.io/badge/SQLite-003B57?style=flat&logo=SQLite&logoColor=white"/> `(2.6.0)`
