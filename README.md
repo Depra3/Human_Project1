@@ -1,18 +1,37 @@
 # 프로젝트 전체 개요
 
 ## Project : 내방 어디?
+![image](https://user-images.githubusercontent.com/120995529/216347597-1ff2140e-78d4-424d-8ffc-4ff9fdc269f9.png)
+
+## 목적
+- 서울시 전/월세 실거래 데이터를 기반한 검색, 머신러닝을 이용한 전세 시세 예측
+***
+
+## 데이터
+- [서울특별시 부동산 전월세가 정보](https://data.seoul.go.kr/dataList/OA-21276/S/1/datasetView.do)
+***
+
+## 링크
 - 폴더 링크 : [Project_1](https://github.com/Depra3/Human_Project1)
 - 배포 링크 : [내 방, 어디?](https://depra3-human-project1-app-kbirqs.streamlit.app/)
-- 기간 : `2023.01.27 ~ 2023.02.10`
-- 사용 언어 : `Python (3.9.13)`
-- 사용 Tool : `VS code (1.74.1)`, `Google Colab`
-- 라이브러리 `Version`
-    + `pandas (1.5.3)`, `numpy (1.24.1)`, `plotly (5.13.0)`, `matplotlib (3.6.3)`, `streamlit (1.17.0)`, `streamlit-option-menu (0.3.2)`, `geopandas (0.12.2)`, `joblib (1.2.0)`, `scikit-learn (1.2.1)`, `tensorflow (2.9.0)`, `seaborn (0.12.2)`, `geopandas (0.12.2)`, `pydeck (0.8.0)`, `prophet (1.1.2)`, `openai (0.26.5)`, `streamlit_chat (0.0.2.1)`, `requests (2.28.2)`
-- 내용 : 서울시 전/월세 실거래 데이터를 기반한 검색, 머신러닝을 이용한 전세 시세 예측
-- 데이터 : [서울특별시 부동산 전월세가 정보](https://data.seoul.go.kr/dataList/OA-21276/S/1/datasetView.do)
+- 시연 영상 링크 : [시연 영상](https://www.youtube.com/watch?v=RbN39pUA1Ww&ab_channel=evanjjh)
+- PDF : 
 ***
+
+## Project 개요
+- 인원 : 4명
+- 기간 : `2023.01.27 ~ 2023.02.10`
+- 사용 언어 : <img src="https://img.shields.io/badge/Python:3.9.13-3776AB?style=flat&logo=Python&logoColor=white"/>
+- 사용 Tool : <img src="https://img.shields.io/badge/Python:1.74.1-3776AB?style=flat&logo=Python&logoColor=white"/> <img src="https://img.shields.io/badge/Google Colab-F9AB00?style=flat&logo=Google Colab&logoColor=white"/>
+- 사용 DB : <img src="https://img.shields.io/badge/SQLite:2.6.0-003B57?style=flat&logo=SQLite&logoColor=white"/>
+- 라이브러리 `Version`
+    + `pandas (1.5.3)`, `numpy (1.24.1)`, `plotly (5.13.0)`, `matplotlib (3.6.3)`, `streamlit (1.17.0)`, `streamlit-option-menu (0.3.2)`, `geopandas (0.12.2)`, `joblib (1.2.0)`, `scikit-learn (1.2.1)`, `tensorflow (2.9.0)`, `seaborn (0.12.2)`, `geopandas (0.12.2)`, `pydeck (0.8.0)`, `prophet (1.1.2)`, `openai (0.26.5)`, `streamlit_chat (0.0.2.1)`, `requests (2.28.2)`,`sqlite(2.6.0)`
+***
+
+## 기간 상세
+
 <details>
-<summary><h2>Project 개요</h2></summary>
+<summary><h4>2023/01/27 ~ 2023/02/10</h4></summary>
 <div markdown="1">
 
 <details>
@@ -72,7 +91,6 @@
 <details>
 <summary><h4>2023/02/01</h4></summary>
 <div markdown="1">
-
 - 개발팀
     + 오늘 한 내용
         - Index 페이지 
@@ -247,6 +265,7 @@
             + batch process 구현
     + 내일 할 것
         - batch process 구현
+
 - 데이터팀
     + 오늘 한 것
         - 실거래가 머신러닝 코드 구현1(완료)
@@ -277,6 +296,7 @@
     + 내일 할 것
         - 전월세 검색 페이지에 조회버튼 버그 수정
         - 배치파일을 이용해 update되는지 확인
+
 - 데이터팀
     + 오늘 한 것
         - LSTM 예측 모델 보완
