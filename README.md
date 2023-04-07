@@ -11,7 +11,10 @@
 - 내용 : 서울시 전/월세 실거래 데이터를 기반한 검색, 머신러닝을 이용한 전세 시세 예측
 - 데이터 : [서울특별시 부동산 전월세가 정보](https://data.seoul.go.kr/dataList/OA-21276/S/1/datasetView.do)
 ***
-## Project 개요
+<details>
+<summary><h2>Project 개요</h2></summary>
+<div markdown="1">
+
 <details>
 <summary><h4>2023/01/27</h4></summary>
 <div markdown="1">
@@ -317,5 +320,8 @@
         - 버그 수정
         - 시스템 통합
         - 마무리
+</div>
+</details>
+
 </div>
 </details>
